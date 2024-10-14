@@ -1,0 +1,18 @@
+@import "@/styles/mixin.scss";
+
+.dialog {
+  width: var(--width-dialog);
+  padding: 16px 20px 10px;
+  border-radius: 4px;
+}
+
+.dialog-desc {
+  font-size: 14px;
+  margin-left: 16px;
+  font-weight: 400;
+}
+
+.dialog-icon {
+  width: 48px;
+  height: 48px;
+}

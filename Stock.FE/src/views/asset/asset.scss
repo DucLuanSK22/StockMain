@@ -1,0 +1,35 @@
+.asset {
+  display: flex;
+  width: 100%;
+  .asset__left {
+        width: 360px;
+      background-color: rgba(36, 37, 39, 0.5);
+    }
+    .asset__right {
+      padding: 20px;
+    }
+    .asset__right__title{
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+    }
+    .chart_title {
+       font-weight: 700;
+      color: white;
+      font-size: 14px;
+      gap: 40px;
+      background-color: rgb(36, 37, 39);
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+    padding: 12px;
+    flex:1;
+    border-radius: 4px;
+    }
+    .asset__right__content{
+     background-color: rgba(36, 37, 39, 0.5);
+     width: calc(100vw - 380px);
+     margin-top: 12px;
+     overflow-y: auto;
+     height: calc(100vh - 127px);
+     padding: 12px;
+    }
+}

@@ -1,0 +1,20 @@
+.back_to_top {
+    background-color: white;
+    position: absolute;
+        box-shadow: 8px 8px 32px rgba(0, 0, 0, .18);
+        border-radius: 100%;
+        color: #0070ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        z-index: 9999;
+        border: 1px solid rgba(0, 0, 0, .18);
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        display: none;
+        &.active {
+            display: flex;
+        }
+}

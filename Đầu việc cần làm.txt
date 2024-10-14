@@ -1,0 +1,23 @@
+- Sinh bảng dữ liệu giả 1 năm của 3 mã chứng khoán: 3 * 365
+- Viết phần xử lý mỗi ngày tự động update giả số liệu của từng mã chứng khoán
+- Vẽ màn hình + phần dữ liệu tài sản người dùng
+- Hoàn thiện nốt phần đăng ký, đăng nhập
+- Vẽ màn hình + phần dữ liệu giao dịch tiền
+- Các đầu API cần xử lý:
++ Đầu lấy tổng tài sản
++ Đầu API lấy tin tức ( khoảng 20 bảng ghi dữ liệu và db)
++ Thêm, sửa, lấy danh sách phần số lệnh thường và deal nắm giữ
+
+rules: 
+ + mua, bán thì khớp giá khớp
+ + mua thì sau 2,5 mới bán được
+-Các đầu API cần viết: 
++ lấy danh sách các stock
++ lấy tài sản + sự thay đổi tài sản từng ngày của người dùng
++ đầu lấy các stock phổ biến
++ đầu lấy dữ liệu biểu đồ của các stock
++ đầu lấy dữ liệu các lệnh, lưu các lệnh đặt
++ đầu lấy dữ liệu deal, đầu thêm các deals
++ đầu lấy thông tin người dùng
++ đầu đăng ký, đăng nhập
++ đầu cộng tiền
