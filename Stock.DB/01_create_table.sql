@@ -5,83 +5,83 @@ drop table if exists deals;
 drop table if exists stocks;
 drop table if exists "user";
 
-create table public."stocks" (
-    stock_id uuid,
-    stock_code text,
-    stock_name text,
-    trading_floor text,
-    max_price numeric,
-    min_price numeric,
-    reference_price numeric,
-    matched_price numeric,
-    total_volume numeric,
-    total_assets numeric,
-    CONSTRAINT stocks_pkey PRIMARY KEY (stock_id)	
+CREATE TABLE public.stocks (
+	stock_id uuid NOT NULL,
+	stock_code text NULL,
+	stock_name text NULL,
+	trading_floor text NULL,
+	max_price numeric NULL,
+	min_price numeric NULL,
+	reference_price numeric NULL,
+	matched_price numeric NULL,
+	total_volume numeric NULL,
+	total_assets numeric NULL,
+	CONSTRAINT stocks_pkey PRIMARY KEY (stock_id)
 );
-create table public."user" (
-    user_id uuid,
-    user_name text,
-    password text,
-    total_net_assets numeric,
-    stock_value numeric,
-    cash_value numeric,
-    CONSTRAINT user_pkey primary key (user_id)    
-);
-
-create table public."transactions" (    
-    transactions_id uuid,
-    stock_id uuid,
-    user_id uuid,
-    stock_code text,
-    transaction_type int,
-    created_at timestamp,
-    order_price numeric,
-    matched_price numeric,
-    volume int,
-    status int,
-    CONSTRAINT transactions_pkey primary key (transactions_id),
-    CONSTRAINT pk_user_transactions FOREIGN KEY (user_id) REFERENCES public.user(user_id),
-    CONSTRAINT pk_stocks_transactions FOREIGN KEY (stock_id) REFERENCES public.stocks(stock_id)
+CREATE TABLE public."user" (
+	user_id uuid NOT NULL,
+	user_name text NULL,
+	"password" text NULL,
+	total_net_assets numeric NULL,
+	stock_value numeric NULL,
+	cash_value numeric NULL,
+	email text NULL,
+	CONSTRAINT user_pkey PRIMARY KEY (user_id)
 );
 
-create table public."deals" (
-    deal_id uuid,
-    stock_id uuid,
-    user_id uuid,
-    stock_code text,
-    total_volume int,
-    total_tradeable_volume int,
-    matched_price numeric,
-    current_price numeric,
-    cost_value numeric,
-    market_value numeric,
-    profit_loss numeric, 
-    profit_loss_by_percent numeric,
-    CONSTRAINT deals_pkey primary key (deal_id),
-    CONSTRAINT pk_user_deals FOREIGN KEY (user_id) REFERENCES public.user(user_id),
-    CONSTRAINT pk_stocks_deals FOREIGN KEY (stock_id) REFERENCES public.stocks(stock_id)
+CREATE TABLE public.transactions (
+	transactions_id uuid NOT NULL,
+	stock_id uuid NULL,
+	user_id uuid NULL,
+	stock_code text NULL,
+	transaction_type int4 NULL,
+	created_at timestamp NULL,
+	order_price numeric NULL,
+	matched_price numeric NULL,
+	volume int4 NULL,
+	status int4 NULL,
+	CONSTRAINT transactions_pkey PRIMARY KEY (transactions_id),
+	CONSTRAINT pk_stocks_transactions FOREIGN KEY (stock_id) REFERENCES public.stocks(stock_id),
+	CONSTRAINT pk_user_transactions FOREIGN KEY (user_id) REFERENCES public."user"(user_id)
 );
 
-
-create table public."stock_price_changes" (
-    stock_price_changes_id uuid,
-    stock_id uuid,
-    current_price numeric,
-    change_price numeric,
-    change_price_by_percent numeric,
-    created_at timestamp,
-    modified_at timestamp,
-    CONSTRAINT stock_price_changes_pkey primary key (stock_price_changes_id),
-    CONSTRAINT pk_stocks_stock_price_changes FOREIGN KEY (stock_id) REFERENCES public.stocks(stock_id)
+CREATE TABLE public.deals (
+	deal_id uuid NOT NULL,
+	stock_id uuid NULL,
+	user_id uuid NULL,
+	stock_code text NULL,
+	total_volume int4 NULL,
+	total_tradeable_volume int4 NULL,
+	matched_price numeric NULL,
+	current_price numeric NULL,
+	cost_value numeric NULL,
+	market_value numeric NULL,
+	profit_loss numeric NULL,
+	profit_loss_by_percent numeric NULL,
+	CONSTRAINT deals_pkey PRIMARY KEY (deal_id),
+	CONSTRAINT pk_stocks_deals FOREIGN KEY (stock_id) REFERENCES public.stocks(stock_id),
+	CONSTRAINT pk_user_deals FOREIGN KEY (user_id) REFERENCES public."user"(user_id)
 );
 
-create table public."table_asset_history" (
-    table_asset_history_id uuid,    
-    user_id uuid,
-    total_net_assets numeric,
-    stock_value numeric,
-    cash_value numeric,
-    created_at timestamp,
-    CONSTRAINT table_asset_history_pkey primary key (table_asset_history_id),
-    CONSTRAINT pk_user_table_asset_history FOREIGN KEY (user_id) REFERENCES public.user(user_id)
+CREATE TABLE public.stock_price_changes (
+	stock_price_changes_id uuid NOT NULL,
+	stock_id uuid NULL,
+	current_price numeric NULL,
+	change_price numeric NULL,
+	change_price_by_percent numeric NULL,
+	created_at timestamp NULL,
+	modified_at timestamp NULL,
+	CONSTRAINT stock_price_changes_pkey PRIMARY KEY (stock_price_changes_id),
+	CONSTRAINT pk_stocks_stock_price_changes FOREIGN KEY (stock_id) REFERENCES public.stocks(stock_id)
+);
+
+CREATE TABLE public.table_asset_history (
+	table_asset_history_id uuid NOT NULL,
+	user_id uuid NULL,
+	total_net_assets numeric NULL,
+	stock_value numeric NULL,
+	cash_value numeric NULL,
+	created_at timestamp NULL,
+	CONSTRAINT table_asset_history_pkey PRIMARY KEY (table_asset_history_id),
+	CONSTRAINT pk_user_table_asset_history FOREIGN KEY (user_id) REFERENCES public."user"(user_id)
 );
