@@ -1,0 +1,190 @@
+.purchase {
+ display: flex; 
+ padding: 8px;
+ gap: 8px;
+ 
+}
+.purchase__left, .purchase__right {
+  background-color: var(--primary--bg-color-1);
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.purchase__right {
+  width: 30vw;
+  padding: 8px;
+  padding-right: 16px; 
+  display: flex;
+  flex-direction: column;
+  
+  .stock_top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 12px;
+    margin-bottom: 20px;
+}
+.stock_search {
+  margin: 10px 0;
+}
+.stock_top_right {
+
+  .stock_code {
+     display: flex;
+    align-items: start;
+  }
+  .code {
+    color: var(--primary--text-color-2);
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 10px;
+  }
+  .flatform {
+  margin-top: 2px;
+}
+  .flatform,.stock_name {
+    color: var(--primary--text-color-1);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+}
+.stock_top_left {
+  display: flex;
+  align-items: center;
+   &.red {
+            color: rgb(255, 66, 66);
+        }
+        &.green {
+            color: rgb(52, 200, 94);
+        }
+        &.yellow {
+            color: rgb(255, 173, 13);
+        }
+  .matching_price {
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 8px;
+  }
+  .price_changes,.price_percent {
+  font-size: 14px;
+  }
+  .price_percent {
+  
+  }
+}
+.stock_bottom {
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0;
+  .price_item {
+    display: flex;
+    gap: 12px;
+  }
+.price_item_title {
+color: var(--primary--text-color-2);
+}
+.price_item_value {
+  font-weight: 600;
+}
+}
+
+}
+.purchase__left{  
+  width: calc(70vw - 8px);
+}
+
+.tab{
+  .tab_header{
+    height: 40px;
+    display: flex;
+    gap: 12px;
+    padding: 12px 8px 0;
+    border-bottom: 1px solid var(--white-5);
+  }
+  .tab_item {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--primary--text-color-1);
+    position: relative;
+    cursor: pointer;
+    
+    &.active {
+      color: rgb(212, 67, 67);
+      &:hover {
+        color: rgb(212, 67, 67);
+       }
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        height: 2px;
+        bottom: 0px;
+        width: 100%;
+        background-color: rgb(212, 67, 67);
+        transition: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+    &:hover {
+      color: var(--primary--text-color-2);
+    }
+  }
+}
+.purchasing_ability {
+  display: flex;
+  justify-content: space-between;
+  margin: 28px 0;
+  .purchasing_ability_title {
+    color: var(--primary--text-color-1);
+  }
+  .purchasing_ability_value {
+    color: var(--primary--text-color-2);
+    font-weight: 500;
+  }
+}
+.set_price{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  .set_price_title {
+    flex-shrink: 0;
+    font-size: 14px;
+    width: 60px;
+    color: var(--primary--text-color-2);
+  }
+  .input {
+  color: var(--primary--text-color-2) ;
+  font-size: 18px ;
+  font-weight: 600 ;
+}
+
+}
+
+
+.purchase_action {
+  display: flex;
+  gap: 12px;
+  margin-top: 120px;  
+}
+.buy, .sell {
+  flex: 1;  
+  color: var(--primary--text-color-2);  
+  border-radius: 8px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.buy {
+  background-color: #2ca01c;
+}
+.sell {
+  background-color: rgb(255, 66, 66);
+}
+.title {
+font-weight: 700;
+}

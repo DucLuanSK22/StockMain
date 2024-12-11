@@ -1,0 +1,59 @@
+.chart-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #f1f1f1;
+}
+
+.doughnut-chart {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    clip: rect(0, 200px, 200px, 100px);
+    /* Cắt nửa bên phải */
+}
+
+.doughnut-chart::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip: rect(0, 100px, 200px, 0);
+    /* Cắt nửa bên trái */
+}
+
+.chart-section {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip: rect(0, 100px, 200px, 0);
+    /* Chia phần cho từng đoạn biểu đồ */
+}
+
+/* Phân đoạn biểu đồ với màu sắc */
+.chart-section.one {
+    background-color: #ff6384;
+    transform: rotate(0deg);
+}
+
+.chart-section.two {
+    background-color: #36a2eb;
+    transform: rotate(240deg);
+}
+
+
+/* Tạo lỗ trống ở giữa */
+.chart-container::before {
+    content: '';
+    position: absolute;
+    top: 25%;
+    left: 25%;
+    width: 50%; 
+    height: 50%;
+    border-radius: 50%;
+    background-color: rgba(36, 37, 39);
+    z-index: 1;
+}

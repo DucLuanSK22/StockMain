@@ -1,0 +1,10 @@
+version: "3.5"
+services:
+  stock-be:
+    image: tuetn/stock-be
+    container_name: stock-be
+    ports:
+      - '5023:5000'
+    environment:
+      - 'CONSUL_ENABLED=true'
+    restart: on-failure:5

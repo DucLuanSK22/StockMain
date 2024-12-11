@@ -1,0 +1,56 @@
+@import "@/styles/mixin.scss";
+#toast {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  z-index: 9999;
+  animation: fadein ease .5s;
+}
+@keyframes fadein {
+
+0% {
+
+    opacity: 0;
+    top: 0;
+}
+100% {
+
+    opacity: 1;
+      top: 24px;
+}
+}
+
+.toast {
+  right: 10;
+  padding: 0 18px;
+  animation: show_slide 1s ease forwards;
+  height: var(--toast-height);
+  width: var(--toast-width);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  background-color: #3d4852;;
+  overflow: hidden;
+  color: #fff;
+  span {
+    margin-left: 24px;
+    font-size: 14px;
+  }
+}
+
+
+.icon-drop {
+  @include iconMixin(-419px, -363px, 10px, 10px);
+}
+.icon-success-medium {
+  @include iconMixin(-96px, -962px, 32px, 32px);
+  flex-shrink: 0;
+}
+.icon-warning-red {
+  @include iconMixin(-752px, -462px, 36px, 36px);
+  flex-shrink: 0;
+}

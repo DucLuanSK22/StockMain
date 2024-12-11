@@ -1,0 +1,32 @@
+@mixin wrapper {
+  border-radius: 2px;
+  background-color: white;
+  border: 1px solid var(--border-color);
+  z-index: 99;
+  padding: 2px 1px;
+}
+
+@mixin transition {
+  transition: all 0.25s ease;
+}
+
+@mixin fontSizeAndColorDefault {
+  font-size: var(--primary-font-size);
+  color: var(--primary-text-color);
+}
+
+@mixin iconMixin($positionX, $positionY, $width, $height) {
+  background: url("@/assets/icon/Sprites.svg") no-repeat $positionX $positionY;
+  width: $width;
+  height: $height;
+}
+
+@mixin textOverflowEllipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@mixin active {
+   background: #f2f8fa;
+    color: #08a5ce;
+}

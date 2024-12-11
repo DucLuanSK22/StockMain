@@ -1,0 +1,23 @@
+/* Embeded Font face */
+@font-face {
+  font-family: "notosans";
+  src: url("@/assets/font/notosans/notosans-bold.woff2");
+  font-weight: 700;
+}
+@font-face {
+  font-family: "notosans";
+  src: url("@/assets/font/notosans/notosans-semibold.woff2");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "notosans";
+  src: url("@/assets/font/notosans/notosans-regular.woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "notosans";
+  src: url("@/assets/font/notosans/notosans-italic.woff2");
+  font-weight: 300;
+  font-style: italic;
+}

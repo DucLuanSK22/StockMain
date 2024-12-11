@@ -1,0 +1,132 @@
+@import "@/styles/mixin.scss";
+
+.input-default {
+  position: relative;
+  min-width: 50px;
+  &.collapse {
+    transition: all 0.5s ease;
+    width: 100px;
+  }
+}
+
+.input-default.error {
+  input {
+    border-color: var(--error-color);
+  }
+}
+
+.input-error {
+  color: var(--error-color);
+  width: fit-content;
+  white-space: nowrap;
+  font-size: var(--primary-font-size);
+  text-align: center;
+  font-size: 11px;
+  margin-top: 2px;
+}
+.input_maxlength {
+  font-size: 14px;
+  justify-self: flex-end;
+}
+textarea,
+input {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  padding: 7px 36px 7px 16px;
+  background-color: transparent;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  position: relative;
+}
+textarea {
+  width: 100%;
+  min-width: 100%;
+  height: auto;
+  min-height: 120px;
+  font-family: "notosans", sans-serif;
+}
+input {
+  color: var(--primary-text-color);
+  width: 100%;
+  height: var(--input-height);
+}
+
+// Css for label
+.input-label-wrapper {
+  margin-bottom: 3px;
+  .input-required {
+    color: red;
+    font-size: var(--primary-font-size);
+  }
+}
+.input-label {
+  color: #86848a;
+  cursor: default;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.input:focus {
+  
+}
+.input.error:focus {
+  border-color: red;
+}
+
+.input::placeholder {
+   color: #86848a;
+}
+.input-icon {
+  display: flex;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gray-600);
+  cursor: pointer;
+}
+.input-icon input {
+  padding-right: 40px;
+}
+
+.btn-radio + .btn-radio {
+  margin-left: 24px;
+}
+
+.gender-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-left: 12px;
+}
+.input__icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  color: #8795a1;
+  transform: translateY(-50%);
+}
+.input-wrapper {
+  position: relative;
+}
+
+.change_input_wrapper {
+  position: absolute;
+  display: flex;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  gap: 8px;
+  .decrease,.increase {
+    background-color: rgba(57, 58, 60, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 2px;
+    color: var(--primary--text-color-2);
+  }
+}
