@@ -4,7 +4,9 @@
   padding: 0;
 }
 
-html { scroll-behavior: smooth; } 
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   font-family: "notosans", sans-serif;
@@ -12,51 +14,68 @@ body {
   color: #424242;
   background-color: var(--primary--bg-color-2);
 }
+
 pre {
   font-family: "notosans", sans-serif;
 }
+
 button,
 input {
   outline: none;
   border: none;
 }
+
 input {
+  background-color: transparent !important;
+
   &::placeholder {
     font-family: "notosans", sans-serif;
   }
-  background-color: transparent !important;
 }
 
 input[type="text"]::-webkit-calendar-picker-indicator {
-    background: none;
-    display: none;
+  background: none;
+  display: none;
 }
 
 input[type="text"]::-webkit-input-placeholder {
-    background: none;
+  background: none;
 }
 
 input[type="text"]:hover {
-    background-color: transparent;
-    border-color: inherit;
+  background-color: transparent;
+  border-color: inherit;
 }
 
 input:-internal-autofill-selected {
-    appearance: menulist-button;
-    background-image: none !important;
-    background-color: none !important;
+  appearance: menulist-button;
+  background-image: none !important;
+  background-color: none !important;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
 }
 
 .copyright {
   display: none !important;
 }
+
 a {
   text-decoration: none;
 }
+
 a:focus-visible {
-    outline-offset: 0px;
-    outline: 0;
+  outline-offset: 0px;
+  outline: 0;
 }
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -66,6 +85,7 @@ a:focus-visible {
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: none;
 }

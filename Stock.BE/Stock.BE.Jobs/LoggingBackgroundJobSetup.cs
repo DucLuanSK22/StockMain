@@ -14,7 +14,7 @@ namespace Stock.BE.Jobs
                     trigger
                         .ForJob(jobKey)
                         .WithSimpleSchedule(schedule =>
-                            schedule.WithIntervalInHours(24).RepeatForever()));
+                            schedule.WithIntervalInMinutes(10).RepeatForever()));
         }
     }
 }

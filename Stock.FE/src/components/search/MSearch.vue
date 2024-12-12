@@ -1,11 +1,11 @@
 <template>
   <div class="input-default search" :class="collapse ? 'collapse' : ''">
     <input :placeholder="placeholder" class="input" style="height: 36px" v-model="dataValue" @focus="handleFocus"
-      @blur="handleBlur" @input="onInput" />
+      @input="onInput" @keydown="onKeyDown($event)" />
     <div class="input-icon">
       <micon type="Search" v-if="!dataValue" />
       <div class="icon-close-wrapper" v-else @click="onClear">
-        <micon type="Close" class="icon_close"/>
+        <micon type="Close" class="icon_close" />
       </div>
     </div>
   </div>
@@ -19,6 +19,10 @@ export default {
     hasCollapse: {
       type: Boolean,
     },
+    datas: {
+      type: Array,
+      default: [],
+    },
     modelValue: {
       type: String,
       default: "",
@@ -28,15 +32,20 @@ export default {
       default: "",
     },
   },
+
   data() {
     return {
       collapse: this.hasCollapse || false,
       dataValue: this.modelValue,
+      indexHover: 0,
     };
   },
   watch: {
     modelValue() {
       this.dataValue = this.modelValue;
+    },
+    datas() {
+      this.data = this.datas;
     },
   },
 
@@ -45,9 +54,12 @@ export default {
      * Sự kiện khi người dùng gõ vào input.
      */
     onInput: debounce(function (e) {
-      this.$emit("update:modelValue", e.target.value);
+      this.setValue("onInput", e.target.value);
     }, 500),
-
+    setValue(eventName, value) {
+      this.$emit("update:modelValue", value);
+      this.$emit(eventName, value);
+    },
     /**
      * Sự kiện blur vào ô input.
      */
@@ -56,12 +68,31 @@ export default {
         this.collapse = false;
       }
     },
-    /**
-     * Sự kiện blur ra ngoài
-     */
-    handleBlur() {
-      if (this.hasCollapse) {
-        this.collapse = true;
+    onKeyDown(event) {
+      try {
+        const keyCode = event.keyCode;
+        if (keyCode === 40) {
+          if (this.indexHover < this.data.length - 1) {
+            this.indexHover++;
+          } else {
+            this.indexHover = 0;
+          }
+          this.$emit("indexHover", this.indexHover);
+        } else if (keyCode === 38) {
+          if (this.indexHover > 0) {
+            this.indexHover--;
+          } else {
+            this.indexHover = this.data.length - 1;
+          }
+          this.$emit("indexHover", this.indexHover);
+        } else if (keyCode === 13) {
+          this.setValue("onBlur", this.data[this.indexHover]);
+
+        } else if (keyCode === 9) {
+          this.setValue("onBlur", this.data[this.indexHover]);
+        }
+      } catch (e) {
+        console.log(e);
       }
     },
     /**

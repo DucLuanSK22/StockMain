@@ -76,7 +76,7 @@ create table public."stock_price_changes" (
 );
 
 create table public."table_asset_history" (
-    table_asset_history_id uuid,
+    table_asset_history_id uuid,    
     user_id uuid,
     total_net_assets numeric,
     stock_value numeric,

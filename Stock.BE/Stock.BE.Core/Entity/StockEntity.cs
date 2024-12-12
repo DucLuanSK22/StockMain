@@ -15,5 +15,8 @@ namespace Stock.BE.Core.Entity
         public decimal matched_price { get; set; }
         public decimal total_volume { get; set; }
         public decimal total_assets { get; set; }
+        public int difference { get; set; }
+        public decimal change_price{ get; set; }
+        public int tradable_volume { get; set; }
     }
 }

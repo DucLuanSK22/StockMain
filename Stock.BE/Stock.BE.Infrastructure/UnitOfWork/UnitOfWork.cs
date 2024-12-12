@@ -162,6 +162,7 @@ namespace Stock.Infrastructure
         {
             var parameters = new DynamicParameters(param);
             await Connection.ExecuteAsync(sql, parameters, transaction: Transaction);
+            
         }
 
 

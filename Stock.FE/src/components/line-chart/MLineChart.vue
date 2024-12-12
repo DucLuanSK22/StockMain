@@ -1,23 +1,26 @@
 <template>
-  <div class="line_chart_wrapper">
-    <div class="choose_period">
+  <div class="line_chart_wrapper" ref="MLineChart">
+    <div class="choose_period" ref="choose_period">
       <div class="choose_period_item" :class="{ 'active': item.key == currentPeriod }" v-for="(item) in periods"
         :key="item.key" @click="currentPeriod = item.key">{{ item.label }}</div>
 
     </div>
     <div class="line_chart">
-
-      <Line :data="chartConfig.data[currentStock][currentPeriod]" :options="chartConfig.options" ref="chart1" />
+      <apexchart type="area" :height="chartHeight" ref="chart" :options="chartOptions" :series="series">
+      </apexchart>
     </div>
-    <div class="line_chart__bottom">
-      <div class="line_chart__bottom_item" @click="handleChooseStock(stock.stock_code)" v-for="stock in stocks"
-        :key="stock.stock_code" :class="{ 'active': stock.stock_code == currentStock }">
-        <div class="top">{{ stock.stock_code }}</div>
-        <div class="middle" :class="`${computedColor(stock.different)}`">
-          <div>{{ stock.total_volume }}</div>
-          <div>{{ stock.change_price }}{{ stock.change_price_by_percent }}</div>
+    <div class="line_chart__bottom" ref="line_chart__bottom">
+      <div class="line_chart__bottom_item" @click="handleChooseStock(stock.IndexId)" v-for="stock in stocks"
+        :key="stock.IndexId" :class="{ 'active': stock.IndexId == currentStock }">
+        <div class="top">
+          <div class="dot" :class="`${computedColor(stock.Change)}`" v-if="stock.IndexId == currentStock"></div>
+          <span>{{ stock.IndexName }}</span>
         </div>
-        <div class="bottom">{{ stock.total_assets }}</div>
+        <div class="middle" :class="`${computedColor(stock.Change)}`">
+          <div>{{ stock.IndexValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}</div>
+          <div>{{ stock.Change }}({{ Number(stock.RatioChange).toFixed(2) }}%)</div>
+        </div>
+        <div class="bottom">{{ formatToBillion(stock.TotalVal).replace(/\B(?=(\d{3})+(?!\d))/g, ',') }}</div>
       </div>
 
     </div>
@@ -26,102 +29,124 @@
 </template>
 
 <script>
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-} from 'chart.js';
-import { Line } from 'vue-chartjs';
-import * as chartConfig from './chartConfig.js';
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-)
+import { configOptions } from './chartConfig.js';
+import MarketAPI from '@/apis/MarketAPI.js';
 
 export default {
-  name: 'App',
-  components: {
-    Line
+  name: 'MLineChart',
+  created() {
+    this.calculateHeight();
   },
   mounted() {
-
+    this.getPopularStock();
   },
   data() {
     return {
-      chartConfig,
-      currentPeriod: '1W',
+      ...configOptions,
+      chartHeight: 300,
+      currentPeriod: 1,
       periods: [
         {
-          key: '1W',
+          key: 0,
           label: '1W',
         },
         {
-          key: '1M',
+          key: 1,
           label: '1M',
-        },
-        {
-          key: '6M',
-          label: '6M',
-        },
-        {
-          key: '1Y',
-          label: '1Y',
-        },
-      ],
-      currentStock: 'VNINDEX',
-      stocks: [
-        {
-          stock_code: 'VNINDEX',
-          total_volume: '1,273.96',
-          total_assets: "15,481.693 tỷ",
-          change_price: "6.34",
-          change_price_by_percent: "(0.48%)",
-          different: 0
-        },
-        {
-          stock_code: 'VN30',
-          total_volume: '1,273.96',
-          total_assets: "15,481.693 tỷ",
-          change_price: "6.34",
-          change_price_by_percent: "(0.48%)",
-          different: 1
-        },
-        {
-          stock_code: 'VN30F1M',
-          total_volume: '1,273.96',
-          total_assets: "15,481.693 tỷ",
-          change_price: "6.34",
-          change_price_by_percent: "(0.48%)",
-          different: 2
         }
-      ]
+      ],
+      currentStock: '',
+      stocks: [
+      ],
+    }
+  },
+  watch: {
+    async currentPeriod() {
+      await this.getData();
+    },
+
+    async currentStock() {
+      await this.getData();
     }
   },
   methods: {
-    handleChooseStock(stockCode) {
-      this.currentStock = stockCode;
+    calculateHeight() {
+      const me = this;
+      me.chartHeight = window.innerHeight - 240;
     },
-    computedColor(different) {
-      switch (different) {
-        case 0:
-          return 'green';
-        case 1:
-          return 'red';
-        case 2:
-          return 'yellow';
-        default:
-          break;
+
+    async getPopularStock() {
+      const me = this;
+      try {
+        me.$store.commit("showLoading");
+        let result = await MarketAPI.getPopularStock();
+        me.$store.commit("hideLoading");
+        me.stocks = result.map(item => {
+          let stock = JSON.parse(item).data[0]
+          return {
+            ...stock,
+
+          }
+        });
+        me.currentStock = me.stocks[0].IndexId;
+
+      } catch (error) {
+        console.log(error);
+        me.$store.commit("hideLoading");
+      }
+    },
+
+    formatToBillion(num) {
+      let billion = (num / 1_000_000_000).toFixed(2);
+      return `${billion} tỉ`;
+    },
+    async getData() {
+      const context = this;
+      try {
+        context.$store.commit("showLoading");
+
+        const response = await MarketAPI.getStockByPeriod({
+          indexId: context.currentStock,
+          periodEnum: context.currentPeriod
+        });
+
+        context.$store.commit("hideLoading");
+        if (response.data.length > 0) {
+          context.series[0].data = response.data.map(item => [
+            new Date(item.TradingDate.split('/').reverse().join('-')),
+            item.IndexValue
+          ]);
+
+          const lastChange = response.data[response.data.length - 1].Change;
+          let color = '#ffad0d';
+
+          if (lastChange > 0) {
+            color = '#34c85e';
+          } else if (lastChange < 0) {
+            color = '#ff4242';
+          }
+
+          context.chartOptions = {
+            ...context.chartOptions,
+            colors: [color],
+          };
+        }
+      } catch (error) {
+        console.error(error);
+        context.$store.commit("hideLoading");
+      }
+    },
+
+    handleChooseStock(stockId) {
+      this.currentStock = stockId;
+    },
+    computedColor(value) {
+      if (value > 0) {
+        return 'green';
+      } else if (value < 0) {
+        return 'red';
+      } else {
+        return 'yellow';
       }
 
     }

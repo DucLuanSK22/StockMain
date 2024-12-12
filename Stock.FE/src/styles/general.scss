@@ -12,6 +12,9 @@
 }
 
 /* Display Flex */
+.flex {
+  display: flex;
+}
 .flex-start {
   display: flex;
   align-items: center;
@@ -121,7 +124,12 @@ svg {
   letter-spacing: 0.01em;
   line-height: 16px;
 }
-
+.gap-1 {
+  gap: 8px;
+}
+.gap-2 {
+  gap: 16px;
+}
 .fz-12 {
   font-size: 12px;
 }
@@ -253,4 +261,12 @@ button:focus {
 
  .border {
   border: 1px solid var(--white-10) !important;
+}
+
+.legend-text {
+    font-size: 12px !important;
+    color: rgb(132, 134, 138);
+}
+.legend-text-wrapper {
+  margin-left: 4px;
 }

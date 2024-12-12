@@ -1,19 +1,24 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Quartz;
 
-namespace Stock.BE.Jobs;
-public static class DependencyInjection
+namespace Stock.BE.Jobs
 {
-    public static void AddJobs(this IServiceCollection services)
+    public static class DependencyInjection
     {
-        services.AddQuartz(options =>
+        public static void AddJobs(this IServiceCollection services)
         {
-            options.UseMicrosoftDependencyInjectionJobFactory();
-        });
-        services.AddQuartzHostedService(options =>
-        {
-            options.WaitForJobsToComplete = true;
-        });
-        services.ConfigureOptions<LoggingBackgroundJobSetup>();
+            services.AddQuartz(options =>
+            {
+                options.UseMicrosoftDependencyInjectionJobFactory();
+            });
+
+            services.AddQuartzHostedService(options =>
+            {
+                options.WaitForJobsToComplete = true;
+            });
+
+            services.ConfigureOptions<LoggingBackgroundJobSetup>();
+            services.ConfigureOptions<UpdateAssetBackgroundJobSetup>();
+        }
     }
 }

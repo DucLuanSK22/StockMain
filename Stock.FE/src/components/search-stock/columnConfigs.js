@@ -3,11 +3,31 @@ export const columns = [
     {
         field: "stock_code",
         headerName: "Mã",
+        groupRow: 'trading_floor',
         type: Enums.EnumColumnType.Text,
         textAlign: 'left',
         width: 100,
         minWidth: 100,
-        isColor: true,
+        keyColor: 'difference',
+        funcCusColor: (value, keyColor = null) => {
+            let key = (keyColor || keyColor === 0) ? keyColor : value;
+            let result = 'white';
+            switch (key) {
+                case 0:
+                    result = 'green';
+                    break;
+                case 1:
+                    result = 'red';
+                    break;
+                case 2:
+                    result = 'yellow';
+                    break;
+                default:
+                    result = 'white';
+                    break;
+            }
+            return result;
+        },
     },
     {
         field: "matched_price",
@@ -16,7 +36,26 @@ export const columns = [
         textAlign: 'right',
         width: 60,
         minWidth: 60,
-        isColor: true,
+        keyColor: 'difference',
+        funcCusColor: (value, keyColor = null) => {
+            let key = (keyColor || keyColor === 0) ? keyColor : value;
+            let result = 'white';
+            switch (key) {
+                case 0:
+                    result = 'green';
+                    break;
+                case 1:
+                    result = 'red';
+                    break;
+                case 2:
+                    result = 'yellow';
+                    break;
+                default:
+                    result = 'white';
+                    break;
+            }
+            return result;
+        },
     },
     {
         field: "change_price",
@@ -25,7 +64,26 @@ export const columns = [
         textAlign: 'right',
         width: 60,
         minWidth: 60,
-        isColor: true,
+        keyColor: 'difference',
+        funcCusColor: (value, keyColor = null) => {
+            let key = (keyColor || keyColor === 0) ? keyColor : value;
+            let result = 'white';
+            switch (key) {
+                case 0:
+                    result = 'green';
+                    break;
+                case 1:
+                    result = 'red';
+                    break;
+                case 2:
+                    result = 'yellow';
+                    break;
+                default:
+                    result = 'white';
+                    break;
+            }
+            return result;
+        },
     },
     {
         field: "total_volume",
@@ -34,125 +92,5 @@ export const columns = [
         textAlign: 'right',
         width: 80,
         minWidth: 80,
-    },
-];
-
-export const datax = [
-    {
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },
-    {
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 2
-    },
-    {
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 1
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
-    },{
-        stock_code: "BWE",
-        matched_price: 44.25,
-        change_price: 0.34,
-        total_volume: 18720,
-        different: 0
     },
 ];

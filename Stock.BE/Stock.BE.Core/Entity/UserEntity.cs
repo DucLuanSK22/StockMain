@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Stock.BE.Core.Model
+namespace Stock.BE.Core.Entity
 {
     /// <summary>
     /// Bảng chứa thông tin người dùng
@@ -14,7 +14,7 @@ namespace Stock.BE.Core.Model
         /// <summary>
         /// Tên đăng nhập của người dùng
         /// </summary>
-        public string fullname { get; set; } = string.Empty;
+        public string user_name { get; set; } = string.Empty;
         /// <summary>
         /// Email người dùng
         /// </summary>
@@ -22,11 +22,10 @@ namespace Stock.BE.Core.Model
         /// <summary>
         /// PasswordHash là một mảng byte chứa giá trị băm (hash) của mật khẩu người dùng.
         /// </summary>
-        public byte[]? password_hash { get; set; }
+        public string password { get; set; }
+        public double total_net_assets { get; set; } = 0;
+        public double stock_value { get; set; } = 0;
+        public double cash_value { get; set; } = 0;
 
-        /// <summary>
-        /// PasswordSalt là một mảng byte chứa giá trị muối được sử dụng trong quá trình băm mật khẩu.
-        /// </summary> 
-        public byte[]? password_salt { get; set; }
     }
 }

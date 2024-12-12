@@ -1,11 +1,7 @@
 <template>
   <div class="modal" v-if="showLoading">
-    <div class="load-wrapp loading-container flex-center">
-      <div class="load-3">
-        <div class="line"></div>
-        <div class="line"></div>
-        <div class="line"></div>
-      </div>
+    <div class="loader_wrapper">
+      <div class="loader"></div>
     </div>
   </div>
 </template>

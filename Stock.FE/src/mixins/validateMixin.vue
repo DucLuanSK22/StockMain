@@ -64,9 +64,9 @@ export default {
       const passwordRef = this.$refs.Password;
       if (passwordRef.$refs.minput.type === "password") {
         passwordRef.$refs.minput.type = "text";
-        passwordRef.showIcon2 = false;
-      } else {
         passwordRef.showIcon2 = true;
+      } else {
+        passwordRef.showIcon2 = false;
         passwordRef.$refs.minput.type = "password";
       }
     },

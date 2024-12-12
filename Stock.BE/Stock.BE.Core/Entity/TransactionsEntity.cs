@@ -4,7 +4,7 @@ public class TransactionsEntity
     /// <summary>
     /// Mã giao dịch
     /// </summary>
-    public Guid transaction_id { get; set; }
+    public Guid transactions_id { get; set; }
 
     /// <summary>
     /// Mã chứng khoán

@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Stock.BE.Core\Stock.BE.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mapper\" />
+  </ItemGroup>
+
 </Project>

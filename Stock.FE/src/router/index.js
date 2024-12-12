@@ -5,13 +5,14 @@ import Home from "@/views/home/Home.vue";
 import Login from "@/views/login/Login.vue";
 import Signup from "@/views/signup/Signup.vue";
 import Asset from "@/views/asset/Asset.vue";
+import Report from "@/views/report/Report.vue";
 import Purchase from "@/views/purchase/Purchase.vue";
 const routes = [
   {
     name: "home",
     component: Home,
     path: "/",
-    meta: { requiresAuth: false, title: "Trang chủ" },
+    meta: { requiresAuth: true, title: "Trang chủ" },
   },
   {
     name: "login",
@@ -25,17 +26,23 @@ const routes = [
     path: "/signup",
     meta: { requiresAuth: false, title: "Đăng ký" },
   },
-   {
+  {
     name: "purchase",
+    path: '/purchase/:stock_id?',
     component: Purchase,
-    path: "/purchase",
-    meta: { requiresAuth: false, title: "Đặt lệnh" },
+    meta: { requiresAuth: true, title: "Đặt lệnh" },
   },
-   {
+  {
     name: "asset",
     component: Asset,
     path: "/asset",
-    meta: { requiresAuth: false, title: "Tài sản" },
+    meta: { requiresAuth: true, title: "Tài sản" },
+  },
+  {
+    name: "report",
+    component: Report,
+    path: "/report",
+    meta: { requiresAuth: true, title: "Báo cáo" },
   },
 ];
 

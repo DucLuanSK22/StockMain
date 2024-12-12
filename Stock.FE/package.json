@@ -10,13 +10,19 @@
   },
   "dependencies": {
     "@microsoft/signalr": "^8.0.7",
+    "apexcharts": "^3.53.0",
     "axios": "^1.7.4",
     "chart.js": "^4.4.4",
+    "dayjs": "^1.11.13",
     "fs": "^0.0.1-security",
     "sass": "^1.77.8",
+    "timeago.js": "^4.0.2",
     "vue": "^3.4.29",
+    "vue-apexcharts": "^1.6.2",
     "vue-chartjs": "^5.3.1",
+    "vue-i18n": "^9.14.1",
     "vue-router": "^4.4.3",
+    "vue3-apexcharts": "^1.6.0",
     "vuex": "^4.1.0"
   },
   "devDependencies": {

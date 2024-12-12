@@ -2,13 +2,29 @@ import Enums from "@/resources/enumeration";
 
 export const normalCommandColumns = [
     {
-        field: "command_type",
+        field: "transaction_type",
         headerName: "Lệnh",
-        type: Enums.EnumColumnType.Text,
+        type: Enums.EnumColumnType.Enum,
+        enumName: 'TransactionType',
         textAlign: 'left',
         width: 50,
         minWidth: 100,
-        isColor: true,
+        funcCusColor: (value, keyColor = null) => {
+            let key = (keyColor || keyColor === 0) ? keyColor : value;
+            let result = 'white';
+            switch (key) {
+                case 0:
+                    result = 'green';
+                    break;
+                case 1:
+                    result = 'red';
+                    break;
+                default:
+                    result = 'white';
+                    break;
+            }
+            return result;
+        },
     },
     {
         field: "stock_code",
@@ -17,7 +33,6 @@ export const normalCommandColumns = [
         textAlign: 'right',
         width: 60,
         minWidth: 60,
-        isColor: true,
     },
     {
         field: "created_at",
@@ -30,7 +45,7 @@ export const normalCommandColumns = [
     {
         field: "order_price",
         headerName: "Giá đặt",
-        type: Enums.EnumColumnType.Text,
+        type: Enums.EnumColumnType.Decimal,
         textAlign: 'right',
         width: 80,
         minWidth: 80,
@@ -38,7 +53,7 @@ export const normalCommandColumns = [
     {
         field: "matched_price",
         headerName: "Giá khớp",
-        type: Enums.EnumColumnType.Text,
+        type: Enums.EnumColumnType.Decimal,
         textAlign: 'right',
         width: 80,
         minWidth: 80,
@@ -52,114 +67,166 @@ export const normalCommandColumns = [
         minWidth: 80,
     },
     {
-        field: "transaction_type",
+        field: "status",
         headerName: "Trạng thái",
-        type: Enums.EnumColumnType.Text,
+        type: Enums.EnumColumnType.Enum,
+        enumName: 'TransactionStatus',
         textAlign: 'right',
         width: 80,
         minWidth: 80,
+        functionCustomColorTD: (status) => {
+            switch (status) {
+                case 0:
+                    return 'yellow';
+                case 1:
+                    return 'green';
+
+            }
+        }
     },
 ];
 
 
-export const dealColumns = [   
+export const dealColumns = [
     {
         field: "stock_code",
         headerName: "Mã",
         type: Enums.EnumColumnType.Text,
-        textAlign: 'right',
+        textAlign: 'left',
         width: 60,
         minWidth: 60,
-        isColor: true,
+        keyColor: 'difference',
+        funcCusColor: (value, keyColor = null) => {
+            let key = (keyColor || keyColor === 0) ? keyColor : value;
+            let result = 'white';
+            switch (key) {
+                case 0:
+                    result = 'green';
+                    break;
+                case 1:
+                    result = 'red';
+                    break;
+                case 2:
+                    result = 'yellow';
+                    break;
+                default:
+                    result = 'white';
+                    break;
+            }
+            return result;
+        },
     },
     {
         field: "total_volume",
-        headerName: "Khối lượng mở",
-        type: Enums.EnumColumnType.Text,
+        headerName: "KL mở",
+        type: Enums.EnumColumnType.Number,
         textAlign: 'right',
-        width: 120,
+        width: 80,
         minWidth: 60,
-        isColor: true,
     },
     {
         field: "total_tradeable_volume",
-        headerName: "Được giao dịch",
-        type: Enums.EnumColumnType.Text,
-        textAlign: 'right',
-        width: 80,
-        minWidth: 80,
-    },
-    {
-        field: "cost_value",
-        headerName: "Giá hòa vốn",
-        type: Enums.EnumColumnType.Text,
-        textAlign: 'right',
-        width: 80,
-        minWidth: 80,
-    },
-    {
-        field: "current_price",
-        headerName: "Giá hiện tại",
-        type: Enums.EnumColumnType.Text,
-        textAlign: 'right',
-        width: 80,
-        minWidth: 80,
-        isColor: true,
-    },
-    {
-        field: "market_value",
-        headerName: "Giá trị hiện tại",
+        headerName: "Được GD",
         type: Enums.EnumColumnType.Number,
         textAlign: 'right',
         width: 80,
         minWidth: 80,
     },
-     
-      {
+
+    {
+        field: "matched_price",
+        headerName: "Giá GD",
+        type: Enums.EnumColumnType.Decimal,
+        textAlign: 'right',
+        width: 80,
+        minWidth: 80,
+    },
+
+    {
+        field: "current_price",
+        headerName: "Giá hiện tại",
+        type: Enums.EnumColumnType.Decimal,
+        textAlign: 'right',
+        width: 80,
+        minWidth: 80,
+        keyColor: 'difference',
+        funcCusColor: (value, keyColor = null) => {
+            let key = (keyColor || keyColor === 0) ? keyColor : value;
+            let result = 'white';
+            switch (key) {
+                case 0:
+                    result = 'green';
+                    break;
+                case 1:
+                    result = 'red';
+                    break;
+                case 2:
+                    result = 'yellow';
+                    break;
+                default:
+                    result = 'white';
+                    break;
+            }
+            return result;
+        },
+    },
+    {
+        field: "cost_value",
+        headerName: "GT hiện tại",
+        type: Enums.EnumColumnType.Number,
+        textAlign: 'right',
+        width: 80,
+        minWidth: 80,
+    },
+
+    {
         field: "profit_loss",
         headerName: "Lãi chưa chốt",
         type: Enums.EnumColumnType.Number,
         textAlign: 'right',
         width: 80,
-          minWidth: 80,
-          isColor: true,
+        minWidth: 80,
+        keyColor: 'is_profit',
+        funcCusColor: (value, keyColor = null) => {
+            let key = (keyColor || keyColor === 0) ? keyColor : value;
+            let result = 'white';
+            switch (key) {
+                case 0:
+                    result = 'green';
+                    break;
+                case 1:
+                    result = 'red';
+                    break;
+                default:
+                    result = 'white';
+                    break;
+            }
+            return result;
+        },
     },
-      {
+    {
         field: "profit_loss_by_percent",
         headerName: "% lãi",
         type: Enums.EnumColumnType.Percent,
         textAlign: 'right',
         width: 80,
-          minWidth: 80,
-          isColor: true,
+        minWidth: 80,
+        keyColor: 'is_profit',
+        funcCusColor: (value, keyColor = null) => {
+            let key = (keyColor || keyColor === 0) ? keyColor : value;
+            let result = 'white';
+            switch (key) {
+                case 0:
+                    result = 'green';
+                    break;
+                case 1:
+                    result = 'red';
+                    break;
+                default:
+                    result = 'white';
+                    break;
+            }
+            return result;
+        },
     },
-];
-
-
-export const dealDatax = [   
-    {
-        stock_code: "BWE",
-        total_volume: 900,
-        total_tradeable_volume: 900,
-        cost_value: 28.043,
-        current_price: 20.90,
-        market_value: 531000,
-        profit_loss: 198128,
-        profit_loss_by_percent: 27.22,
-        different: 0
-    },
-];
-
-
-export const normalCommandDatax = [
-    {
-        command_type: "Mua",
-        stock_code: "BWE",
-        created_at: new Date(),
-        order_price: 1.25,
-        matched_price: null,
-        volume: 300,
-        transaction_type: 'Chờ gửi',
-        different: 0
-    },   
 ];

@@ -11,11 +11,13 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Npgsql" Version="7.0.7" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Stock.BE.Core\Stock.BE.Core.csproj" />
+    <ProjectReference Include="..\Stock.BE.Email\Stock.BE.Email.csproj" />
   </ItemGroup>
 
   <ItemGroup>

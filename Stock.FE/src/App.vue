@@ -2,7 +2,7 @@
   <DefaultLayout :show-header="showHeader"><router-view></router-view></DefaultLayout>
   <MToast></MToast>
   <MDialog />
-  <mloading />
+  <MLoading />
 
   <back-to-top />
 </template>

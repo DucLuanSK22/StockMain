@@ -1,19 +1,17 @@
 <template>
   <div class="input-default" :class="error ? 'error' : ''">
-    <div class="input-label-wrapper" v-if="label">
-      <span class="input-label">{{ label }}</span>
-      <span class="input-required">{{
-    rules?.includes("required") ? " *" : ""
-  }}</span>
-    </div>
+
 
     <div class="input-wrapper">
       <component :is="typeComponent" class="input" ref="minput" :type="typeInput ? typeInput : 'text'" :rules="rules"
-        :name="name" :error="error" :value="dataValue" :style="{ 'text-align': textAlign }"
-        :placeholder="placeholderInput" :tabindex="tabIndex" @input="onInput" :maxlength="maxLength > 0 && maxLength"
-        @blur="onBlur(name)" spellcheck="false" />
+        :name="name" :error="error" :value="dataValue" :style="{ 'text-align': textAlign }" :tabindex="tabIndex"
+        @input="onInput" :maxlength="maxLength > 0 && maxLength" @blur="onBlur(name)" spellcheck="false" />
+      <div class="input-label-wrapper" :class="!dataValue ? 'no-text' : 'has-text'" v-if="label"
+        @click="handleClickLabel">
+        <span class="input-label">{{ label }}</span>
+      </div>
       <component :is="showIcon2 ? icon2 : icon1" class="input__icon" @click="clickIcon"></component>
-      <div class="change_input_wrapper">
+      <div class="change_input_wrapper" v-if="isAdjustable">
         <div class="decrease" @click="handleDecrease">
           <micon type="Decrease" />
         </div>
@@ -21,6 +19,7 @@
           <micon type="Increase" />
         </div>
       </div>
+
     </div>
     <div class="flex-between" v-if="checkError">
       <div v-show="error" class="input-error">{{ error }}</div>
@@ -136,15 +135,21 @@ export default {
     }
   },
   methods: {
+    handleClickLabel() {
+      this.$refs.minput.focus();
+    },
     handleDecrease() {
-      if ((this.currentValue - this.defaultChangeValue) <= 0) {
-        this.assignDataValue(0);
-      } else {
-        this.assignDataValue(+this.currentValue - this.defaultChangeValue);
+      let result = 0;
+      if ((this.currentValue - this.defaultChangeValue) > 0) {
+        result = +this.currentValue - this.defaultChangeValue;
       }
+      this.assignDataValue(result);
+      this.$emit("update:modelValue", result);
     },
     handleIncrease() {
-      this.assignDataValue(+this.currentValue + this.defaultChangeValue);
+      let value = +this.currentValue + this.defaultChangeValue;
+      this.assignDataValue(value);
+      this.$emit("update:modelValue", value);
     },
     /**
      * Format lại giá trị hiển thị trong input theo định dạng.
@@ -170,6 +175,7 @@ export default {
      * Modified at (10/07/2023)
      */
     onInput(event) {
+      this.$emit("onInput", event.target.value);
       if (this.allowNumber) {
         const value = +event.target.value.split(".").join("");
         this.$emit("update:modelValue", value);
@@ -244,6 +250,14 @@ export default {
         this.validateData();
       }
     },
+    /**
+     * @description Set the error message for the input.
+     * @param {String} error The error message.
+     */
+    setError(error) {
+      this.error = error;
+
+    }
   },
 };
 </script>

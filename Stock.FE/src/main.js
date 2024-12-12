@@ -7,18 +7,24 @@ import MButton from "@/components/button/MButton.vue";
 import MInputPri from "@/components/input/MInputPri.vue";
 import CTable from "@/components/ctable/CTable.vue";
 import MSearch from "./components/search/MSearch.vue";
+import VueApexCharts from "vue3-apexcharts";
+import { moudle } from "@/utils/index";
+import MResources from "@/helper/resources";
 import { createApp } from 'vue';
+import i18n from "@/i18n";
 
 import App from './App.vue';
 
 const app = createApp(App);
 app.config.globalProperties.$route = router;
 app.config.globalProperties.$enums = Enums;
-
+app.config.globalProperties.$ms = moudle;
+app.config.globalProperties.$MResources = MResources; 
+app.component("micon", Icon);
 app.component("micon", Icon);
 app.component("mbutton", MButton);
 app.component("minput", MInputPri);
 app.component("msearch", MSearch);
 app.component("ctable", CTable);
-
-app.use(router).use(store).mount('#app');
+app.use(VueApexCharts);
+app.use(router).use(i18n).use(store).mount('#app');
